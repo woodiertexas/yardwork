@@ -29,12 +29,14 @@ public class Yardwork implements ModInitializer {
 
 		Registry.register(Registry.ITEM, new Identifier("yardwork", "weedwhacker"), WEEDWHACKER);
 
+		/*
 		ModelPredicateProviderRegistry.register(WEEDWHACKER, new Identifier("run"), (itemStack, world, entity, junk) -> {
 			if (entity == null) {
 				return 0.0f;
 			}
 			return entity.getActiveItem() != itemStack ? 0.0f : (itemStack.getMaxUseTime());
 		});
+		 */
 
 		ModelPredicateProviderRegistry.register(WEEDWHACKER, new Identifier("running"), (itemStack, world, entity, junk) -> {
 			if (entity == null) {
