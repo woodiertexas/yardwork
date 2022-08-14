@@ -20,9 +20,11 @@ public class Weedwhacker extends Item {
         BlockPos position = context.getBlockPos();
         PlayerEntity player = context.getPlayer();
 
+        double randomX = Math.random();
+        double randomY = Math.random();
         assert player != null;
         if (!player.isSpectator()) {
-            for (BlockPos pos : BlockPos.iterate(position.add(-0.5, 0, -0.5), position.add(0.5, 1, 0.5))) {
+            for (BlockPos pos : BlockPos.iterate(position.add(-randomX, 0, -randomY), position.add(randomX, 1, randomY))) {
                 if (world.getBlockState(pos).isIn(MACHINE_HARVESTABLE)) {
                     world.breakBlock(pos, true, player, 4);
                 }

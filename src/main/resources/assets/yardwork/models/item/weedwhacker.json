@@ -139,7 +139,7 @@
 		{
 			"predicate": {
 				"running": 1,
-				"run": 1.0
+				"run": 0.8
 			},
 			"model": "yardwork:item/weedwhacker_active"
 		}

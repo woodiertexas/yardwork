@@ -34,7 +34,7 @@ public class Yardwork implements ModInitializer {
 			if (entity == null) {
 				return 0.0f;
 			}
-			return entity.getActiveItem() != itemStack ? 0.0f : (itemStack.getMaxUseTime());
+			return entity.getActiveItem() != itemStack ? 0.0f : (itemStack.getMaxUseTime() - entity.getItemUseTimeLeft() / 20.0f);
 		});
 		 */
 
