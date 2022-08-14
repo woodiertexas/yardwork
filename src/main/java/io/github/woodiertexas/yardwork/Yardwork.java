@@ -2,9 +2,7 @@ package io.github.woodiertexas.yardwork;
 
 import io.github.woodiertexas.yardwork.items.Weedwhacker;
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
