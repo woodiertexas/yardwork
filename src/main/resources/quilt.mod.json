@@ -1,8 +1,8 @@
 {
 	"schema_version": 1,
 	"quilt_loader": {
-		"group": "com.example",
-		"id": "example_mod",
+		"group": "io.github.woodiertexas",
+		"id": "yardwork",
 		"version": "${version}",
 		"metadata": {
 			"name": "Mod Name",
@@ -15,11 +15,11 @@
 				"issues": "https://github.com/QuiltMC/quilt-template-mod/issues",
 				"sources": "https://github.com/QuiltMC/quilt-template-mod"
 			},
-			"icon": "assets/example_mod/icon.png"
+			"icon": "assets/yardwork/icon.png"
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
-			"init": "com.example.example_mod.ExampleMod"
+			"init": "io.github.woodiertexas.yardwork.Yardwork"
 		},
 		"depends": [
 			{
@@ -35,6 +35,5 @@
 				"versions": ">=1.19.2"
 			}
 		]
-	},
-	"mixin": "example_mod.mixins.json"
+	}
 }

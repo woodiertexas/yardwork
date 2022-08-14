@@ -1,0 +1,14 @@
+{
+	"values": [
+		"#minecraft:crops",
+		"#minecraft:flowers",
+		"#minecraft:tall_flowers",
+		"minecraft:grass",
+		"minecraft:tall_grass",
+		"minecraft:fern",
+		"minecraft:large_fern",
+		"minecraft:big_dripleaf",
+		"minecraft:big_dripleaf_stem",
+		"minecraft:small_dripleaf"
+	]
+}
