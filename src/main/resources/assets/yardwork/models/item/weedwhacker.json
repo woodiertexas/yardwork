@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench by Cart3r.  ",
 	"textures": {
-		"0": "yardwork/weedwacker",
-		"1": "yardwork/weedwacker_string",
-		"particle": "yardwork/weedwacker"
+		"0": "yardwork:item/weedwhacker",
+		"1": "yardwork:item/weedwhacker_string",
+		"particle": "yardwork:item/weedwhacker"
 	},
 	"elements": [
 		{
@@ -134,5 +134,20 @@
 			"rotation": [-93.44, -68.7, -93.22],
 			"translation": [5.5, 0, -1.25]
 		}
-	}
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"running": 1
+			},
+			"model": "yardwork:item/weedwhacker_run"
+		},
+		{
+			"predicate": {
+				"running": 1,
+				"run": 1.0
+			},
+			"model": "yardwork:item/weedwhacker_active"
+		}
+	]
 }
