@@ -28,21 +28,5 @@ public class Yardwork implements ModInitializer {
 		LOGGER.info("Hello Quilt world from {}!", mod.metadata().name());
 
 		Registry.register(Registry.ITEM, new Identifier("yardwork", "weedwhacker"), WEEDWHACKER);
-
-		/*
-		ModelPredicateProviderRegistry.register(WEEDWHACKER, new Identifier("run"), (itemStack, world, entity, junk) -> {
-			if (entity == null) {
-				return 0.0f;
-			}
-			return entity.getActiveItem() != itemStack ? 0.0f : (itemStack.getMaxUseTime() - entity.getItemUseTimeLeft() / 20.0f);
-		});
-		 */
-
-		ModelPredicateProviderRegistry.register(WEEDWHACKER, new Identifier("running"), (itemStack, world, entity, junk) -> {
-			if (entity == null) {
-				return 0.0f;
-			}
-			return entity.isUsingItem() && entity.getActiveItem() != itemStack ? 1.0f : 0.0f;
-		});
 	}
 }
