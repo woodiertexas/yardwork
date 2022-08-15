@@ -138,8 +138,8 @@
 	"overrides": [
 		{
 			"predicate": {
-				"running": 1,
-				"run": 0.8
+				"active": 1,
+				"run": 1.0
 			},
 			"model": "yardwork:item/weedwhacker_active"
 		}
