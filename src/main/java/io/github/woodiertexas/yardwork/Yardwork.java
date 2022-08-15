@@ -1,16 +1,18 @@
 package io.github.woodiertexas.yardwork;
 
 import io.github.woodiertexas.yardwork.items.Weedwhacker;
-import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
+import org.quiltmc.qsl.recipe.api.RecipeManagerHelper;
+import org.quiltmc.qsl.recipe.api.builder.VanillaRecipeBuilders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,5 +30,18 @@ public class Yardwork implements ModInitializer {
 		LOGGER.info("Hello Quilt world from {}!", mod.metadata().name());
 
 		Registry.register(Registry.ITEM, new Identifier("yardwork", "weedwhacker"), WEEDWHACKER);
+
+		RecipeManagerHelper.registerStaticRecipe(
+				VanillaRecipeBuilders.shapedRecipe(
+						"B R",
+								" I ",
+								"S  ")
+						.output(new ItemStack(WEEDWHACKER))
+						.ingredient('B', Items.STONE_BUTTON)
+						.ingredient('R', Items.REDSTONE)
+						.ingredient('I', Items.IRON_INGOT)
+						.ingredient('S', Items.STRING)
+						.build(new Identifier("yardwork", "weedwhacker"), "")
+		);
 	}
 }
