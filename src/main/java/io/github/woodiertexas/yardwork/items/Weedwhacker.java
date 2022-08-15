@@ -2,6 +2,7 @@ package io.github.woodiertexas.yardwork.items;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
@@ -32,5 +33,10 @@ public class Weedwhacker extends Item {
             return ActionResult.CONSUME;
         }
         return ActionResult.PASS;
+    }
+
+    @Override
+    public int getMaxUseTime(ItemStack stack) {
+        return 999999;
     }
 }
