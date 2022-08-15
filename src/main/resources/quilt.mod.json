@@ -21,7 +21,7 @@
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
 			"init": "io.github.woodiertexas.yardwork.Yardwork",
-			"client": "io.github.woodiertexas.yardwork.YardworkClient"
+			"client_init": "io.github.woodiertexas.yardwork.YardworkClient"
 		},
 		"depends": [
 			{
