@@ -7,6 +7,8 @@ import net.minecraft.item.DyeableItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.CookingRecipeSerializer;
+import net.minecraft.recipe.SpecialRecipeSerializer;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -25,6 +27,7 @@ public class Yardwork implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("Yardwork");
 
 	public static final TagKey<Block> MACHINE_HARVESTABLE = TagKey.of(Registry.BLOCK_KEY, new Identifier("yardwork", "machine_harvestable"));
+	public static SpecialRecipeSerializer<WeedwhackerRecipe> WEEDWHACKER_RECIPE;
 	public static final Weedwhacker WEEDWHACKER = new Weedwhacker(new QuiltItemSettings().group(ItemGroup.MISC).maxCount(1));
 
 	@Override
@@ -32,6 +35,7 @@ public class Yardwork implements ModInitializer {
 		LOGGER.info("Hello Quilt world from {}!", mod.metadata().name());
 
 		Registry.register(Registry.ITEM, new Identifier("yardwork", "weedwhacker"), WEEDWHACKER);
+		Registry.register(Registry.RECIPE_SERIALIZER, new Identifier("yardwork", "special_craft_weedwhacker_recipe"), new SpecialRecipeSerializer<>(WeedwhackerRecipe::new));
 		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> ((DyeableItem)stack.getItem()).getColor(stack), WEEDWHACKER);
 
 		RecipeManagerHelper.registerStaticRecipe(
