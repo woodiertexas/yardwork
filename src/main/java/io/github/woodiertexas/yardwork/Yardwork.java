@@ -1,7 +1,9 @@
 package io.github.woodiertexas.yardwork;
 
 import io.github.woodiertexas.yardwork.items.Weedwhacker;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.item.DyeableItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -30,6 +32,7 @@ public class Yardwork implements ModInitializer {
 		LOGGER.info("Hello Quilt world from {}!", mod.metadata().name());
 
 		Registry.register(Registry.ITEM, new Identifier("yardwork", "weedwhacker"), WEEDWHACKER);
+		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> ((DyeableItem)stack.getItem()).getColor(stack), WEEDWHACKER);
 
 		RecipeManagerHelper.registerStaticRecipe(
 				VanillaRecipeBuilders.shapedRecipe(

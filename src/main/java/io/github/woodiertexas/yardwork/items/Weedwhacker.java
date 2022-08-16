@@ -1,6 +1,8 @@
 package io.github.woodiertexas.yardwork.items;
 
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.DyeableItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -10,7 +12,7 @@ import net.minecraft.world.World;
 
 import static io.github.woodiertexas.yardwork.Yardwork.MACHINE_HARVESTABLE;
 
-public class Weedwhacker extends Item {
+public class Weedwhacker extends Item implements DyeableItem {
     public Weedwhacker(Settings settings) {
         super(settings);
     }
