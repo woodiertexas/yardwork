@@ -89,7 +89,7 @@ modrinth {
 	projectId = "yardwork"
 	uploadFile = remapJar
 	gameVersions = [libs.versions.minecraft.get()]
-	versionNumber = "v${project.version}"
+	versionNumber = "${project.version}"
 	versionName = "Yardwork v${project.version}"
 	loaders = ["quilt"]
 	def ref = System.getenv("GITHUB_REF")
