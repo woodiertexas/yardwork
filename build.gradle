@@ -86,11 +86,11 @@ publishing {
 
 modrinth {
 	token = System.getenv("MODRINTH_TOKEN")
-	projectId = "chocolate-bar"
+	projectId = "yardwork"
 	uploadFile = remapJar
 	gameVersions = [libs.versions.minecraft.get()]
 	versionNumber = "v${project.version}"
-	versionName = "Chocolate Bar v${project.version}"
+	versionName = "Yardwork v${project.version}"
 	loaders = ["quilt"]
 	def ref = System.getenv("GITHUB_REF")
 	changelog = System.getenv("CHANGELOG") ?:
