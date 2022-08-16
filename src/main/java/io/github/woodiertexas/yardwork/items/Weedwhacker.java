@@ -1,15 +1,16 @@
 package io.github.woodiertexas.yardwork.items;
 
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeableItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
-import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -20,36 +21,23 @@ public class Weedwhacker extends Item implements DyeableItem {
         super(settings);
     }
 
-    public void onCraft(ItemStack stack, World world, PlayerEntity player) {
-        if (!stack.hasNbt()) {
-            stack.setNbt(new NbtCompound());
-
-            NbtCompound weedWhackerNbt = stack.getNbt();
-            assert weedWhackerNbt != null;
-            if (!weedWhackerNbt.contains("CanDestroy", 9)) {
-                NbtList canDestroyList = new NbtList();
-                canDestroyList.add(NbtString.of("#yardwork:machine_harvestable"));
-                weedWhackerNbt.put("CanDestroy", canDestroyList);
-            }
-        }
-    }
-
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        World world = context.getWorld();
-        BlockPos position = context.getBlockPos();
-        PlayerEntity player = context.getPlayer();
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        ItemStack stack = user.getStackInHand(hand);
 
-        assert player != null;
-        if (!player.isSpectator()) {
-            for (BlockPos pos : BlockPos.iterate(position.add(-1, 0, -1), position.add(1, 1, 1))) {
-                if (world.getBlockState(pos).isIn(MACHINE_HARVESTABLE)) {
-                    world.breakBlock(pos, true, player, 4);
+        if (client.crosshairTarget instanceof BlockHitResult blockHitResult) {
+            BlockPos position = blockHitResult.getBlockPos();
+            if (!user.isSpectator()) {
+                for (BlockPos pos : BlockPos.iterate(position.add(-1, 0, -1), position.add(1, 1, 1))) {
+                    if (world.getBlockState(pos).isIn(MACHINE_HARVESTABLE)) {
+                        world.breakBlock(pos, true, user, 4);
+                    }
                 }
+                return TypedActionResult.pass(stack);
             }
-            return ActionResult.CONSUME;
         }
-        return ActionResult.PASS;
+        return TypedActionResult.pass(stack);
     }
 
     @Override
