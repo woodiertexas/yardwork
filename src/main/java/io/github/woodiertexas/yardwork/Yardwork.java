@@ -36,7 +36,7 @@ public class Yardwork implements ModInitializer {
 
 		Registry.register(Registry.ITEM, new Identifier("yardwork", "weedwhacker"), WEEDWHACKER);
 		Registry.register(Registry.RECIPE_SERIALIZER, new Identifier("yardwork", "special_craft_weedwhacker_recipe"), new SpecialRecipeSerializer<>(WeedwhackerRecipe::new));
-		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> ((DyeableItem)stack.getItem()).getColor(stack), WEEDWHACKER);
+		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> ((DyeableItem)stack.getItem()).getColor(stack), WEEDWHACKER); //((DyeableItem)stack.getItem()).getColor(stack)
 
 		RecipeManagerHelper.registerStaticRecipe(
 				VanillaRecipeBuilders.shapedRecipe(
