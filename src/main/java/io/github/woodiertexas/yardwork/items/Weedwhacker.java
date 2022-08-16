@@ -6,6 +6,9 @@ import net.minecraft.item.DyeableItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.NbtString;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -22,6 +25,18 @@ public class Weedwhacker extends Item implements DyeableItem {
         World world = context.getWorld();
         BlockPos position = context.getBlockPos();
         PlayerEntity player = context.getPlayer();
+
+        if (!context.getStack().hasNbt()) {
+            context.getStack().setNbt(new NbtCompound());
+
+            NbtCompound weedWhackerNbt = context.getStack().getNbt();
+            assert weedWhackerNbt != null;
+            if (!weedWhackerNbt.contains("CanDestroy", 9)) {
+                NbtList canDestroyList = new NbtList();
+                canDestroyList.add(NbtString.of("#yardwork:machine_harvestable"));
+                weedWhackerNbt.put("CanDestroy", canDestroyList);
+            }
+        }
 
         assert player != null;
         if (!player.isSpectator()) {
