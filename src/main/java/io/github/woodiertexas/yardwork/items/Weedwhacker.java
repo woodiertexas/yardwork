@@ -20,16 +20,11 @@ public class Weedwhacker extends Item implements DyeableItem {
         super(settings);
     }
 
-    @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        World world = context.getWorld();
-        BlockPos position = context.getBlockPos();
-        PlayerEntity player = context.getPlayer();
+    public void onCraft(ItemStack stack, World world, PlayerEntity player) {
+        if (!stack.hasNbt()) {
+            stack.setNbt(new NbtCompound());
 
-        if (!context.getStack().hasNbt()) {
-            context.getStack().setNbt(new NbtCompound());
-
-            NbtCompound weedWhackerNbt = context.getStack().getNbt();
+            NbtCompound weedWhackerNbt = stack.getNbt();
             assert weedWhackerNbt != null;
             if (!weedWhackerNbt.contains("CanDestroy", 9)) {
                 NbtList canDestroyList = new NbtList();
@@ -37,6 +32,13 @@ public class Weedwhacker extends Item implements DyeableItem {
                 weedWhackerNbt.put("CanDestroy", canDestroyList);
             }
         }
+    }
+
+    @Override
+    public ActionResult useOnBlock(ItemUsageContext context) {
+        World world = context.getWorld();
+        BlockPos position = context.getBlockPos();
+        PlayerEntity player = context.getPlayer();
 
         assert player != null;
         if (!player.isSpectator()) {
