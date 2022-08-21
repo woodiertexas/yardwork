@@ -1,16 +1,11 @@
 package io.github.woodiertexas.yardwork.items;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeableItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtList;
-import net.minecraft.nbt.NbtString;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -23,19 +18,19 @@ public class Weedwhacker extends Item implements DyeableItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        MinecraftClient client = MinecraftClient.getInstance();
         ItemStack stack = user.getStackInHand(hand);
 
-        if (client.crosshairTarget instanceof BlockHitResult blockHitResult) {
-            BlockPos position = blockHitResult.getBlockPos();
-            if (!user.isSpectator()) {
-                for (BlockPos pos : BlockPos.iterate(position.add(-1, 0, -1), position.add(1, 1, 1))) {
-                    if (world.getBlockState(pos).isIn(MACHINE_HARVESTABLE)) {
-                        world.breakBlock(pos, true, user, 4);
-                    }
+        if (!user.isSpectator()) {
+            var cast = user.raycast(3.5, 0, false);
+            var pos1 = cast.getPos();
+            BlockPos position = new BlockPos(pos1);
+
+            for (BlockPos pos2 : BlockPos.iterate(position.add(-1, 0, -1), position.add(1, 1, 1))) {
+                if (world.getBlockState(pos2).isIn(MACHINE_HARVESTABLE)) {
+                    world.breakBlock(pos2, true, user, 4);
                 }
-                return TypedActionResult.pass(stack);
             }
+            return TypedActionResult.pass(stack);
         }
         return TypedActionResult.pass(stack);
     }

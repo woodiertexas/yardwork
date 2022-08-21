@@ -1,9 +1,7 @@
 package io.github.woodiertexas.yardwork;
 
 import io.github.woodiertexas.yardwork.items.Weedwhacker;
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.item.DyeableItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -35,7 +33,6 @@ public class Yardwork implements ModInitializer {
 
 		Registry.register(Registry.ITEM, new Identifier("yardwork", "weedwhacker"), WEEDWHACKER);
 		Registry.register(Registry.RECIPE_SERIALIZER, new Identifier("yardwork", "special_craft_weedwhacker_recipe"), new SpecialRecipeSerializer<>(WeedwhackerRecipe::new));
-		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> ((DyeableItem)stack.getItem()).getColor(stack), WEEDWHACKER); //((DyeableItem)stack.getItem()).getColor(stack)
 
 		RecipeManagerHelper.registerStaticRecipe(
 				VanillaRecipeBuilders.shapedRecipe(
