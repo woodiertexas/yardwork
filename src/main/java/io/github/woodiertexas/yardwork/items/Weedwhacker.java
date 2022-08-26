@@ -20,7 +20,7 @@ public class Weedwhacker extends Item implements DyeableItem {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
 
-        if (!user.isSpectator()) {
+        if (!user.isSpectator() && !world.isClient()) {
             var cast = user.raycast(3.5, 0, false);
             var pos1 = cast.getPos();
             BlockPos position = new BlockPos(pos1);
