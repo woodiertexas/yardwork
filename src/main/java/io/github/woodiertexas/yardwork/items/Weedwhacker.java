@@ -1,15 +1,24 @@
 package io.github.woodiertexas.yardwork.items;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeableItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.BlockStateParticleEffect;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
 
 import static io.github.woodiertexas.yardwork.Yardwork.MACHINE_HARVESTABLE;
+import static io.github.woodiertexas.yardwork.Yardwork.NON_MACHINE_HARVESTABLE;
 
 public class Weedwhacker extends Item implements DyeableItem {
     public Weedwhacker(Settings settings) {
@@ -26,7 +35,19 @@ public class Weedwhacker extends Item implements DyeableItem {
             BlockPos position = new BlockPos(pos1);
 
             for (BlockPos pos2 : BlockPos.iterate(position.add(-1, 0, -1), position.add(1, 1, 1))) {
-                if (world.getBlockState(pos2).isIn(MACHINE_HARVESTABLE)) {
+                if (world.getBlockState(pos2).isIn(NON_MACHINE_HARVESTABLE)) {
+                    if (world instanceof ServerWorld serverWorld) {
+                        serverWorld.spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, world.getBlockState(pos2)),
+                                pos2.getX() + 0.5,
+                                pos2.getY() + 0.5,
+                                pos2.getZ() + 0.5,
+                                10,
+                                0.2,
+                                0.2,
+                                0.2,
+                                0.5);
+                    }
+                } else if (world.getBlockState(pos2).isIn(MACHINE_HARVESTABLE)) {
                     world.breakBlock(pos2, true, user, 4);
                 }
             }

@@ -24,6 +24,7 @@ public class Yardwork implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("Yardwork");
 
 	public static final TagKey<Block> MACHINE_HARVESTABLE = TagKey.of(Registry.BLOCK_KEY, new Identifier("yardwork", "machine_harvestable"));
+	public static final TagKey<Block> NON_MACHINE_HARVESTABLE = TagKey.of(Registry.BLOCK_KEY, new Identifier("yardwork", "non_machine_harvestable"));
 	public static SpecialRecipeSerializer<WeedwhackerRecipe> WEEDWHACKER_RECIPE;
 	public static final Weedwhacker WEEDWHACKER = new Weedwhacker(new QuiltItemSettings().group(ItemGroup.MISC).maxCount(1));
 
