@@ -30,8 +30,6 @@ public class Yardwork implements ModInitializer {
 
 	@Override
 	public void onInitialize(ModContainer mod) {
-		LOGGER.info("Hello Quilt world from {}!", mod.metadata().name());
-
 		Registry.register(Registry.ITEM, new Identifier("yardwork", "weedwhacker"), WEEDWHACKER);
 		Registry.register(Registry.RECIPE_SERIALIZER, new Identifier("yardwork", "special_craft_weedwhacker_recipe"), new SpecialRecipeSerializer<>(WeedwhackerRecipe::new));
 

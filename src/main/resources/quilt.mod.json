@@ -12,7 +12,6 @@
 				"Carter": "Model/Texture Artist"
 			},
 			"contact": {
-				"homepage": "https://example.com/",
 				"issues": "https://github.com/woodiertexas/yardwork/issues",
 				"sources": "https://github.com/woodiertexas/yardwork"
 			},
@@ -37,5 +36,11 @@
 				"versions": ">=1.19.2"
 			}
 		]
+	},
+	"modmenu": {
+		"links": {
+			"modmenu.modrinth": "https://modrinth.com/mod/yardwork",
+			"modmenu.discord": "https://discord.gg/bWN57F5CCA"
+		}
 	}
 }
