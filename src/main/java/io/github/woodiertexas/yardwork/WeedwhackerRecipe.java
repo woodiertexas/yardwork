@@ -2,10 +2,8 @@ package io.github.woodiertexas.yardwork;
 
 import com.google.common.collect.Lists;
 import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.DyeableItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
+import net.minecraft.recipe.CraftingCategory;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.SpecialCraftingRecipe;
 import net.minecraft.util.Identifier;
@@ -16,32 +14,30 @@ import java.util.List;
 import static io.github.woodiertexas.yardwork.Yardwork.WEEDWHACKER_RECIPE;
 
 public class WeedwhackerRecipe extends SpecialCraftingRecipe {
-    public WeedwhackerRecipe(Identifier identifier) {
-        super(identifier);
+    public WeedwhackerRecipe(Identifier identifier, CraftingCategory theCategory) {
+        super(identifier, theCategory);
     }
 
     @Override
     public boolean matches(CraftingInventory inventory, World world) {
         ItemStack itemStack = ItemStack.EMPTY;
-        List<ItemStack> list = Lists.<ItemStack>newArrayList();
+        List<ItemStack> list = Lists.newArrayList();
 
         for(int i = 0; i < inventory.size(); ++i) {
             ItemStack itemStack2 = inventory.getStack(i);
-            if (!itemStack2.isEmpty()) {
-                if (itemStack2.getItem() instanceof DyeableItem) {
-                    if (!itemStack.isEmpty()) {
-                        return false;
-                    }
-
-                    itemStack = itemStack2;
-                } else {
-                    if (!(itemStack2.getItem() instanceof DyeItem)) {
-                        return false;
-                    }
-
-                    list.add(itemStack2);
-                }
+            if (!itemStack2.isEmpty() || !(itemStack2.getItem() instanceof DyeItem)) {
+                return false;
             }
+            
+            if (itemStack2.getItem() instanceof DyeableItem) {
+                if (!itemStack.isEmpty()) {
+                    return false;
+                }
+
+                itemStack = itemStack2;
+            }
+
+            list.add(itemStack2);
         }
 
         return !itemStack.isEmpty() && !list.isEmpty();
@@ -49,26 +45,29 @@ public class WeedwhackerRecipe extends SpecialCraftingRecipe {
 
     @Override
     public ItemStack craft(CraftingInventory inventory) {
-        List<DyeItem> list = Lists.<DyeItem>newArrayList();
+        List<DyeItem> list = Lists.newArrayList();
         ItemStack itemStack = ItemStack.EMPTY;
 
         for(int i = 0; i < inventory.size(); ++i) {
+            Item item = null;
             ItemStack itemStack2 = inventory.getStack(i);
+            
             if (!itemStack2.isEmpty()) {
-                Item item = itemStack2.getItem();
-                if (item instanceof DyeableItem) {
-                    if (!itemStack.isEmpty()) {
-                        return ItemStack.EMPTY;
-                    }
-
-                    itemStack = itemStack2.copy();
-                } else {
-                    if (!(item instanceof DyeItem)) {
-                        return ItemStack.EMPTY;
-                    }
-
-                    list.add((DyeItem)item);
+                item = itemStack2.getItem();
+            }
+            
+            if (item instanceof DyeableItem) {
+                if (!itemStack.isEmpty()) {
+                    return ItemStack.EMPTY;
                 }
+
+                itemStack = itemStack2.copy();
+            } else {
+                if (!(item instanceof DyeItem)) {
+                    return ItemStack.EMPTY;
+                }
+
+                list.add((DyeItem) item);
             }
         }
         return !itemStack.isEmpty() && !list.isEmpty() ? DyeableItem.blendAndSetColor(itemStack, list) : ItemStack.EMPTY;
