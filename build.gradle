@@ -78,20 +78,19 @@ publishing {
 }
 
 modrinth {
-	token = System.getenv("MODRINTH_TOKEN")
-	projectId = "yardwork"
-	uploadFile = remapJar
-	gameVersions = [libs.versions.minecraft.get()]
-	versionNumber = "${project.version}"
-	versionName = "Yardwork v${project.version}"
-	loaders = ["quilt"]
-	def ref = System.getenv("GITHUB_REF")
-	changelog = System.getenv("CHANGELOG") ?:
-			(ref != null && ref.startsWith("refs/tags/")) ?
-					"You may view the changelog at https://github.com/woodiertexas/yardwork/releases/tag/${URLEncoder.encode(ref.substring(10), StandardCharsets.UTF_8)}" :
-					"No changelog is available. Perhaps poke at https://github.com/woodiertexas/yardwork for a changelog?"
+    token = System.getenv("MODRINTH_TOKEN")
+    projectId = "yardwork"
+    uploadFile = remapJar
+    additionalFiles = [sourcesJar]
+    gameVersions = [libs.versions.minecraft.get()]
+    loaders = ["quilt"]
+    def ref = System.getenv("GITHUB_REF")
+    changelog = System.getenv("CHANGELOG") ?:
+            (ref != null && ref.startsWith("refs/tags/")) ?
+                    "You may view the changelog at https://github.com/debuggyteam/tablesaw/releases/tag/${URLEncoder.encode(ref.substring(10), StandardCharsets.UTF_8)}" :
+                    "No changelog is available. Perhaps poke at https://github.com/debuggyteam/tablesaw for a changelog?"
 
-	dependencies {
-		required.project "qsl"
-	}
+    dependencies {
+        required.project "qsl"
+    }
 }
