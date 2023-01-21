@@ -1,21 +1,16 @@
 package io.github.woodiertexas.yardwork.items;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeableItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.BlockStateParticleEffect;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldEvents;
 
 import static io.github.woodiertexas.yardwork.Yardwork.MACHINE_HARVESTABLE;
 import static io.github.woodiertexas.yardwork.Yardwork.NON_MACHINE_HARVESTABLE;
