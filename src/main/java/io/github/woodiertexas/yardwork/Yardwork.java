@@ -49,5 +49,7 @@ public class Yardwork implements ModInitializer {
 						.ingredient('S', Items.STRING)
 						.build(new Identifier("yardwork", "weedwhacker"), "")
 		);
+
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.addItem(WEEDWHACKER));
 	}
 }
