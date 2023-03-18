@@ -10,6 +10,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
@@ -29,7 +30,7 @@ public class Weedwhacker extends Item implements DyeableItem {
 			var cast = user.raycast(3.5, 0, false);
 			var pos1 = cast.getPos();
 
-			BlockPos position = new BlockPos((int) Math.floor(pos1.getX()), (int) Math.floor(pos1.getY()), (int) Math.floor(pos1.getZ()));
+			BlockPos position = new BlockPos(MathHelper.floor(pos1.getX()), MathHelper.floor(pos1.getY()), MathHelper.floor(pos1.getZ()));
 
 			for (BlockPos pos2 : BlockPos.iterate(position.add(-1, 0, -1), position.add(1, 1, 1))) {
 				if (world.getBlockState(pos2).isIn(NON_MACHINE_HARVESTABLE)) {
