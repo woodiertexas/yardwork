@@ -31,7 +31,7 @@ public class Yardwork implements ModInitializer {
 	public static final TagKey<Block> NON_MACHINE_HARVESTABLE = TagKey.of(RegistryKeys.BLOCK, new Identifier("yardwork", "non_machine_harvestable"));
 	public static SpecialRecipeSerializer<WeedwhackerRecipe> WEEDWHACKER_RECIPE;
 	public static final Weedwhacker WEEDWHACKER = new Weedwhacker(new QuiltItemSettings().maxCount(1));
-	
+
 	@Override
 	public void onInitialize(ModContainer mod) {
 		Registry.register(Registries.ITEM, new Identifier("yardwork", "weedwhacker"), WEEDWHACKER);
@@ -50,6 +50,6 @@ public class Yardwork implements ModInitializer {
 						.build(new Identifier("yardwork", "weedwhacker"), "")
 		);
 
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.addItem(WEEDWHACKER));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS_AND_UTILITIES).register(entries -> entries.addItem(WEEDWHACKER));
 	}
 }
