@@ -2,7 +2,6 @@ package io.github.woodiertexas.yardwork;
 
 import com.google.common.collect.Lists;
 import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.inventory.RecipeInputInventory;
 import net.minecraft.item.*;
 import net.minecraft.recipe.CraftingCategory;
 import net.minecraft.recipe.RecipeSerializer;
@@ -21,7 +20,7 @@ public class WeedwhackerRecipe extends SpecialCraftingRecipe {
     }
 
     @Override
-    public boolean matches(RecipeInputInventory inventory, World world) {
+    public boolean matches(CraftingInventory inventory, World world) {
         ItemStack itemStack = ItemStack.EMPTY;
         List<ItemStack> list = Lists.newArrayList();
 
@@ -46,7 +45,7 @@ public class WeedwhackerRecipe extends SpecialCraftingRecipe {
     }
 
 	@Override
-    public ItemStack craft(RecipeInputInventory inventory, DynamicRegistryManager registryManager) {
+    public ItemStack craft(CraftingInventory inventory, DynamicRegistryManager registryManager) {
         List<DyeItem> list = Lists.newArrayList();
         ItemStack itemStack = ItemStack.EMPTY;
 
@@ -75,7 +74,7 @@ public class WeedwhackerRecipe extends SpecialCraftingRecipe {
         return !itemStack.isEmpty() && !list.isEmpty() ? DyeableItem.blendAndSetColor(itemStack, list) : ItemStack.EMPTY;
     }
 
-	@Override
+    @Override
     public boolean fits(int width, int height) {
         return width * height >= 2;
     }
